@@ -33,4 +33,24 @@ public class LCSNaive implements ILCS {
 		}
 		return tmp2;
 	}
+
+	@Override
+	public int getRecursionCount() {
+		return RECURSIVECALLS;
+	}
+	
+	public static void main(String[] args){
+		LCSNaive lcsDP = new LCSNaive();
+		String s1 = "ABCBD";
+		String s2 = "BDCABA";
+		System.out.println("String 1: " + s1);
+		System.out.println("String 2: " + s2);
+		String result = (lcsDP.findLCS(s1, s2));
+		System.out.println("Recursion Count " +lcsDP.RECURSIVECALLS);
+		System.out.println("LCS "+ result);
+		if(result.equals("BCBA") || result.equals("BACB"))
+			System.out.println("Test Passed");
+		else
+			System.err.println("Test Failed");
+	}
 }

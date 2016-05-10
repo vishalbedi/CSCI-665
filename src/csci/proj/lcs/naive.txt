@@ -1,0 +1,8 @@
+        INPUT LENGTH          LCS LENGTH     RECURSIVE CALLS                TIME
+                   9                   8                 268                   1
+                  11                  10                1155                   2
+                  13                  12               12019                   7
+                  15                  14              113873                  54
+                  16                  16                  16                   0
+                  18                  18                  18                   0
+                  20                  20                  20                   0

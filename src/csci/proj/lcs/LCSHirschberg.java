@@ -33,6 +33,8 @@ public class LCSHirschberg implements ILCS{
 			return s2.charAt(s2.indexOf(s1))+"";
 		else if (n ==1 && s1.indexOf(s2) != -1)
 			return s1.charAt(s1.indexOf(s2))+"";
+		else if (m==1 && n ==1)
+			return s1.equals(s2) ? s1 :"";
 		else{
 			RECURSIONCOUNT++;
 			int i = m/2;
@@ -71,7 +73,7 @@ public class LCSHirschberg implements ILCS{
 	
 	public static void main(String[] args){
 		LCSHirschberg lcsDP = new LCSHirschberg();
-		String s1 = "ABCBDA";
+		String s1 = "ABCBD";
 		String s2 = "BDCABA";
 		System.out.println("String 1: " + s1);
 		System.out.println("String 2: " + s2);
@@ -81,5 +83,10 @@ public class LCSHirschberg implements ILCS{
 			System.out.println("Test Passed");
 		else
 			System.err.println("Test Failed");
+	}
+
+	@Override
+	public int getRecursionCount() {
+		return RECURSIONCOUNT;
 	}
 }

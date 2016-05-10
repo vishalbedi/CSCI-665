@@ -1,5 +1,7 @@
 package csci.proj.lcs;
 
+import java.util.Random;
+
 public class ExperimentFramework {
 	/**
 	 *  Values to represent experiment Type
@@ -12,6 +14,8 @@ public class ExperimentFramework {
 	private final int BINARY = 0;
 	private final int LETTERS = 1;
 	
+	private final long SEED = 1234;
+	
 	private int startLength = 0;
 	private int maxLength = 0;
 	private int interval = 0;
@@ -20,6 +24,15 @@ public class ExperimentFramework {
 	private ILCS algo;
 	
 	private char[] alphabet;
+	
+	private StringGenerator strGen = new StringGenerator();
+	
+	private Random generator = new Random(SEED);
+	
+	private FileIO io = new FileIO();
+	
+	private String[] HEADERS = new String[]{"INPUT LENGTH",
+			"LCS LENGTH", "RECURSIVE CALLS", "TIME"};
 	
 	
 	private void setDefaults(int opt){
@@ -32,7 +45,7 @@ public class ExperimentFramework {
 			break;
 		case MEMOIZATION:
 			startLength = 10;
-			maxLength = 10000;
+			maxLength = 3700;
 			interval = 100;
 			filename = "memoization.txt";
 			break;
@@ -55,6 +68,7 @@ public class ExperimentFramework {
 			filename = "naive.txt";
 			break;
 		}
+		io.init(filename, HEADERS);
 	}
 	
 	private void setUpAlgo(int opt){
@@ -85,9 +99,28 @@ public class ExperimentFramework {
 		}
 	}
 	
+	private void testRun(){
+		for (int i = startLength; i < maxLength; i += interval) {
+			int len1 =  i + generator.nextInt(interval);
+			int len2 =  i + generator.nextInt(interval);
+			String s1 = strGen.createString(alphabet, len1, SEED);
+			String s2 = strGen.createString(alphabet, len2, SEED);
+			int maxLen = len1 > len2 ? len1 : len2;
+			long startTime = System.currentTimeMillis();
+			String result = algo.findLCS(s1, s2);
+			long endTime = System.currentTimeMillis();
+			int recursionCount = algo.getRecursionCount();
+			io.write(maxLen+"",result.length()+"",recursionCount+"", (endTime-startTime)+"");
+		}
+		io.save();
+	}
 	
-	
-	
-	
-	
+	public void executeAll(int alphabetOption){
+		this.setAlphabet(alphabetOption);
+		for (int i = 0; i <= HIRSCHBERG; i++) {
+			this.setDefaults(i);
+			this.setUpAlgo(i);
+			this.testRun();
+		}
+	}
 }

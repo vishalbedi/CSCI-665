@@ -43,7 +43,7 @@ public class LCSDynamicP implements ILCS{
 	
 	public static void main(String[] args){
 		LCSDynamicP lcsDP = new LCSDynamicP();
-		String s1 = "ABCBDA";
+		String s1 = "ABCBD";
 		String s2 = "BDCABA";
 		System.out.println("String 1: " + s1);
 		System.out.println("String 2: " + s2);
@@ -53,5 +53,11 @@ public class LCSDynamicP implements ILCS{
 			System.out.println("Test Passed");
 		else
 			System.err.println("Test Failed");
+	}
+
+	@Override
+	public int getRecursionCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
