@@ -1,6 +1,7 @@
 package csci.proj.lcs;
 
 public class LCSHirschberg implements ILCS{
+	public int RECURSIONCOUNT = 0;
 	
 	private int[] AlgoB(String s1, String s2){
 		s1 = padNullString(s1);
@@ -33,6 +34,7 @@ public class LCSHirschberg implements ILCS{
 		else if (n ==1 && s1.indexOf(s2) != -1)
 			return s1.charAt(s1.indexOf(s2))+"";
 		else{
+			RECURSIONCOUNT++;
 			int i = m/2;
 			String[] splitStrings = splitString(i, s1);
 			String a = splitStrings[0];
