@@ -49,20 +49,23 @@ public class LCSMemoization implements ILCS {
 	}
 	
 	private String getLCS (int[][] dp, String s1, String s2, int i, int j){
-		if (i ==0 || j == 0)
+		if (i <0 || j < 0)
 			return "";
 		if (s1.charAt(i) == s2.charAt(j))
 			return s1.charAt(i) + getLCS(dp, s1, s2, i-1, j-1);
-		else if (dp[i-1][j]>= dp[i][j-1])
-			return getLCS(dp, s1, s2, i-1, j);
-		else 
-			return getLCS(dp, s1, s2, i, j-1);
+		else if(i>0 && j>0){
+			if (dp[i-1][j]>= dp[i][j-1])
+				return getLCS(dp, s1, s2, i-1, j);
+			else 
+				return getLCS(dp, s1, s2, i, j-1);
+		}
+		return "";
 	}
 	
 	
 	public static void main(String[] args){
 		LCSMemoization lcsDP = new LCSMemoization();
-		String s1 = "ABCBD";
+		String s1 = "ABCBDA";
 		String s2 = "BDCABA";
 		System.out.println("String 1: " + s1);
 		System.out.println("String 2: " + s2);

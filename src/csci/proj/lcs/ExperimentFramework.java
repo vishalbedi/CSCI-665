@@ -14,7 +14,8 @@ public class ExperimentFramework {
 	private final int BINARY = 0;
 	private final int LETTERS = 1;
 	
-	private final long SEED = 1234;
+	private final long SEED1 = 1234;
+	private final long SEED2 = 888;
 	
 	private int startLength = 0;
 	private int maxLength = 0;
@@ -27,7 +28,7 @@ public class ExperimentFramework {
 	
 	private StringGenerator strGen = new StringGenerator();
 	
-	private Random generator = new Random(SEED);
+	private Random generator = new Random(SEED1);
 	
 	private FileIO io = new FileIO();
 	
@@ -38,27 +39,27 @@ public class ExperimentFramework {
 	private void setDefaults(int opt){
 		switch (opt) {
 		case NAIVE:
-			startLength = 8;
+			startLength = 4;
 			maxLength = 22;
 			interval = 2;
 			filename = "naive.txt";
 			break;
 		case MEMOIZATION:
 			startLength = 10;
-			maxLength = 3700;
-			interval = 100;
+			maxLength = 7800;
+			interval = 300;
 			filename = "memoization.txt";
 			break;
 		case DYNAMICPROG:
 			startLength = 10;
-			maxLength = 10000;
-			interval = 100;
+			maxLength = 15000;
+			interval = 500;
 			filename = "dynamicprog.txt";
 			break;
 		case HIRSCHBERG:
 			startLength = 10;
-			maxLength = 40000;
-			interval = 100;
+			maxLength = 100000;
+			interval = 3000;
 			filename = "hirschberg.txt";
 			break;
 		default:
@@ -103,8 +104,8 @@ public class ExperimentFramework {
 		for (int i = startLength; i < maxLength; i += interval) {
 			int len1 =  i + generator.nextInt(interval);
 			int len2 =  i + generator.nextInt(interval);
-			String s1 = strGen.createString(alphabet, len1, SEED);
-			String s2 = strGen.createString(alphabet, len2, SEED);
+			String s1 = strGen.createString(alphabet, len1, SEED1);
+			String s2 = strGen.createString(alphabet, len2, SEED2);
 			int maxLen = len1 > len2 ? len1 : len2;
 			long startTime = System.currentTimeMillis();
 			String result = algo.findLCS(s1, s2);
@@ -117,10 +118,13 @@ public class ExperimentFramework {
 	
 	public void executeAll(int alphabetOption){
 		this.setAlphabet(alphabetOption);
-		for (int i = 0; i <= HIRSCHBERG; i++) {
-			this.setDefaults(i);
-			this.setUpAlgo(i);
-			this.testRun();
-		}
+		this.setDefaults(HIRSCHBERG);
+		this.setUpAlgo(HIRSCHBERG);
+		this.testRun();
+//		for (int i = 0; i <= HIRSCHBERG; i++) {
+//			this.setDefaults(i);
+//			this.setUpAlgo(i);
+//			this.testRun();
+//		}
 	}
 }

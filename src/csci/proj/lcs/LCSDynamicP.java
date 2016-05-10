@@ -21,14 +21,19 @@ public class LCSDynamicP implements ILCS{
 		return dp;
 	}
 	private String getLCS (int[][] dp, String s1, String s2, int i, int j){
-		if (i ==0 || j == 0)
-			return "";
-		if (s1.charAt(i) == s2.charAt(j))
-			return s1.charAt(i) + getLCS(dp, s1, s2, i-1, j-1);
-		else if (dp[i-1][j]>= dp[i][j-1])
-			return getLCS(dp, s1, s2, i-1, j);
-		else 
-			return getLCS(dp, s1, s2, i, j-1);
+		StringBuilder sb = new StringBuilder();
+		while(i!= 0 && j!=0){
+			if(s1.charAt(i) == s2.charAt(j)){
+				sb.append(s1.charAt(i));
+				i--;
+				j--;
+			}else if(dp[i-1][j]>= dp[i][j-1]){
+				i--;
+			}else{
+				j--;
+			}
+		}
+		return sb.toString();
 	}
 	
 	public String findLCS(String s1, String s2){
