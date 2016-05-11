@@ -118,13 +118,33 @@ public class ExperimentFramework {
 	
 	public void executeAll(int alphabetOption){
 		this.setAlphabet(alphabetOption);
-		this.setDefaults(HIRSCHBERG);
-		this.setUpAlgo(HIRSCHBERG);
+			for (int i = 0; i <= HIRSCHBERG; i++) {
+				execute(i);
+		}
+	}
+	
+	public void executeNaive(int alphabetOption){
+		this.setAlphabet(alphabetOption);
+		execute(NAIVE);
+	}
+	
+	public void executeMemoization(int alphabetOption){
+		this.setAlphabet(alphabetOption);
+		execute(MEMOIZATION);
+	}
+	
+	public void executeHirchberg(int alphabetOption){
+		this.setAlphabet(alphabetOption);
+		execute(HIRSCHBERG);
+	}
+	
+	public void executeDP(int alphabetOption){
+		this.setAlphabet(alphabetOption);
+		execute(DYNAMICPROG);
+	}
+	public void execute(int Algo){
+		this.setDefaults(Algo);
+		this.setUpAlgo(Algo);
 		this.testRun();
-//		for (int i = 0; i <= HIRSCHBERG; i++) {
-//			this.setDefaults(i);
-//			this.setUpAlgo(i);
-//			this.testRun();
-//		}
 	}
 }
