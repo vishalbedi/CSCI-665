@@ -2,11 +2,11 @@ package csci.proj.lcs;
 
 public class LCSDynamicP implements ILCS{
 	
-	
+	// Pad empty space to start of the string
 	private String padNullString(String str){
 		return " "+str;
 	}
-	
+	// fill dp table
 	private int[][] makeDp (String s1, String s2){
 		int[][] dp = new int[s1.length()][s2.length()];		
 		for (int i = 1; i<s1.length();i++){
@@ -20,6 +20,7 @@ public class LCSDynamicP implements ILCS{
 		}
 		return dp;
 	}
+	// fetch the LCS string via DP
 	private String getLCS (int[][] dp, String s1, String s2, int i, int j){
 		StringBuilder sb = new StringBuilder();
 		while(i!= 0 && j!=0){

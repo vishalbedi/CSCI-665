@@ -29,7 +29,16 @@ public class LCSMemoization implements ILCS {
 		String result =  getLCS(memo, s1,s2, i-1, j-1);
 		return new StringBuilder(result).reverse().toString();
 	}
-	
+	/**
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @param i
+	 * @param j
+	 * @param memo
+	 * @return lcsLength
+	 * 
+	 */
 	private int getLCS(String s1, String s2, int i, int j, int[][] memo){
 		if (i == -1 || j == -1)
 			return 0;
@@ -47,7 +56,15 @@ public class LCSMemoization implements ILCS {
 		return memo[i][j];
 		
 	}
-	
+	/**
+	 * 
+	 * @param dp
+	 * @param s1
+	 * @param s2
+	 * @param i
+	 * @param j
+	 * @return lcsString
+	 */
 	private String getLCS (int[][] dp, String s1, String s2, int i, int j){
 		if (i <0 || j < 0)
 			return "";

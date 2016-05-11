@@ -6,6 +6,7 @@ public class ExperimentFramework {
 	/**
 	 *  Values to represent experiment Type
 	 */
+	//Defaults for Algorithms
 	private final int NAIVE = 0;
 	private final int MEMOIZATION = 1;
 	private final int DYNAMICPROG = 2;
@@ -13,7 +14,7 @@ public class ExperimentFramework {
 	
 	private final int BINARY = 0;
 	private final int LETTERS = 1;
-	
+	//Seed value to random generators so the results are reproducible
 	private final long SEED1 = 1234;
 	private final long SEED2 = 888;
 	
@@ -21,7 +22,7 @@ public class ExperimentFramework {
 	private int maxLength = 0;
 	private int interval = 0;
 	private String filename;
-	
+	// Algo object
 	private ILCS algo;
 	
 	private char[] alphabet;
@@ -29,13 +30,13 @@ public class ExperimentFramework {
 	private StringGenerator strGen = new StringGenerator();
 	
 	private Random generator = new Random(SEED1);
-	
+	// Helper class to save data to file
 	private FileIO io = new FileIO();
 	
 	private String[] HEADERS = new String[]{"INPUT LENGTH",
 			"LCS LENGTH", "RECURSIVE CALLS", "TIME"};
 	
-	
+	// Defaults for algos
 	private void setDefaults(int opt){
 		switch (opt) {
 		case NAIVE:
@@ -71,7 +72,7 @@ public class ExperimentFramework {
 		}
 		io.init(filename, HEADERS);
 	}
-	
+	// Factory pattern to get desired algo
 	private void setUpAlgo(int opt){
 		switch (opt) {
 		case NAIVE:
@@ -91,7 +92,7 @@ public class ExperimentFramework {
 			break;
 		}
 	}
-	
+	// Alphabet for the experiment
 	private void setAlphabet(int opt){
 		if (opt == BINARY){
 			alphabet = new char[]{'0','1'};
@@ -100,6 +101,7 @@ public class ExperimentFramework {
 		}
 	}
 	
+	//Test suite to run time profile of all the algorithms
 	private void testRun(){
 		for (int i = startLength; i < maxLength; i += interval) {
 			int len1 =  i + generator.nextInt(interval);
@@ -115,7 +117,7 @@ public class ExperimentFramework {
 		}
 		io.save();
 	}
-	
+	// Executes all algos and saves data to a file
 	public void executeAll(int alphabetOption){
 		this.setAlphabet(alphabetOption);
 			for (int i = 0; i <= HIRSCHBERG; i++) {
